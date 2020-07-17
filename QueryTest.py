@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import tkinter as tk
 from tkinter import ttk
 import DatabaseQuery as Db
+import TableBuilder as Tb
 
 # client = MongoClient("mongodb+srv://davis:ENSF592@cluster0.qo5yv.mongodb.net/Cluster0?retryWrites=true&w=majority")
 # db = client['YYC_Traffic']
@@ -11,7 +12,8 @@ import DatabaseQuery as Db
 
 query = Db.Query()
 results = query.query()
-
+tree = Tb.TableBuilder(results).build_table_flow()
+print(type(tree))
 
 def print_table(index):
     main_table = []
@@ -30,9 +32,9 @@ def print_table(index):
         temp = sorted(main_table, key=lambda x: x[1])
         print_gui(temp)
 
-        if index == "Year":
-            temp = sorted(main_table, key=lambda x: x[2])
-            print_gui(temp)
+    if index == "Year":
+        temp = sorted(main_table, key=lambda x: x[2])
+        print_gui(temp)
 
     if index == "Length":
         temp = sorted(main_table, key=lambda x: x[3])

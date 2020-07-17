@@ -1,6 +1,4 @@
 from pymongo import MongoClient
-from tabulate import tabulate
-import pandas as pd
 import tkinter as tk
 from tkinter import ttk
 
@@ -9,8 +7,6 @@ db = client['YYC_Traffic']
 collection = db['TrafficFlow2016']
 
 results = collection.find({})
-# data_frame = pd.DataFrame(results)
-# print(data_frame.head())
 
 
 def print_table(index):
@@ -49,7 +45,8 @@ def sort_table(index=""):
 
 def print_gui(table):
     window = tk.Tk()
-    tree = ttk.Treeview(window, column=("Segment", "Coordinates", "Year", "Length", "Volume"), show='headings')
+    frame = tk.Frame()
+    tree = ttk.Treeview(frame, column=("Segment", "Coordinates", "Year", "Length", "Volume"), show='headings')
     tree.heading("Segment", text="Segment")
     tree.heading("Coordinates", text="Coordinates")
     tree.heading("Year", text="Year")

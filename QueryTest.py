@@ -1,12 +1,16 @@
 from pymongo import MongoClient
 import tkinter as tk
 from tkinter import ttk
+import DatabaseQuery as Db
 
-client = MongoClient("mongodb+srv://davis:ENSF592@cluster0.qo5yv.mongodb.net/Cluster0?retryWrites=true&w=majority")
-db = client['YYC_Traffic']
-collection = db['TrafficFlow2016']
+# client = MongoClient("mongodb+srv://davis:ENSF592@cluster0.qo5yv.mongodb.net/Cluster0?retryWrites=true&w=majority")
+# db = client['YYC_Traffic']
+# collection = db['TrafficFlow2016']
+#
+# results = collection.find({})
 
-results = collection.find({})
+query = Db.Query()
+results = query.query()
 
 
 def print_table(index):
@@ -45,8 +49,7 @@ def sort_table(index=""):
 
 def print_gui(table):
     window = tk.Tk()
-    frame = tk.Frame()
-    tree = ttk.Treeview(frame, column=("Segment", "Coordinates", "Year", "Length", "Volume"), show='headings')
+    tree = ttk.Treeview(window, column=("Segment", "Coordinates", "Year", "Length", "Volume"), show='headings')
     tree.heading("Segment", text="Segment")
     tree.heading("Coordinates", text="Coordinates")
     tree.heading("Year", text="Year")
@@ -63,8 +66,8 @@ def print_gui(table):
 
 
 if __name__ == '__main__':
-    # sort_table()
+    sort_table()
     # sort_table("Segment")
     # sort_table("Year")
     # sort_table("Length")
-    sort_table("Volume")
+    # sort_table("Volume")

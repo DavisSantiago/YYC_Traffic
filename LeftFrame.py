@@ -23,6 +23,7 @@ class LeftFrame(tk.Frame):
         year_combo.grid(row=1, column=1)
 
         def read_cmd():
+            Rf.RightFrame.build_frame()
             if type_combo.get() == 'Traffic Volume':
                 if year_combo.get() == '2016':
                     status_text.delete('1.0', tk.END)
@@ -36,6 +37,8 @@ class LeftFrame(tk.Frame):
                     status_text.delete('1.0', tk.END)
                     status_text.insert(tk.END, "Displaying Traffic\nVolume of 2018")
                     Rf.RightFrame.build_frame("no_filter", 'TrafficFlow2018')
+            elif type_combo.get() == 'Traffic Accidents':
+                Rf.RightFrame.build_frame("no_filter", 'TrafficIncidents')
             else:
                 status_text.delete('1.0', tk.END)
                 status_text.insert(tk.END, "Error")

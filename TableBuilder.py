@@ -19,6 +19,15 @@ class TableBuilder:
         tree.heading("Length", text="Length")
         tree.heading("Volume", text="Volume")
 
+        # centering the data for these three columns
+        tree.column("Year", anchor='n')
+        tree.column("Length", anchor='n')
+        tree.column("Volume", anchor='n')
+
+        # me messing around and figured out how to change colors of the headers lol
+        style = ttk.Style()
+        style.configure('Treeview.Heading', font=('Calibri', 13, 'bold'))
+
         i = 0
         for row in table:
             tree.insert("", i, values=row)

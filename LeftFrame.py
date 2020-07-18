@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
+import RightFrame as Rf
 
 
 class LeftFrame(tk.Frame):
@@ -21,7 +22,25 @@ class LeftFrame(tk.Frame):
         year_combo = ttk.Combobox(self, values=('2016', '2017', '2018'))
         year_combo.grid(row=1, column=1)
 
-        read_btn = tk.Button(self, text="Read", width=10)
+        def read_cmd():
+            if type_combo.get() == 'Traffic Volume':
+                if year_combo.get() == '2016':
+                    status_text.delete('1.0', tk.END)
+                    status_text.insert(tk.END, "Displaying Traffic\nVolume of 2016")
+                    Rf.RightFrame.build_frame("no_filter", 'TrafficFlow2016')
+                elif year_combo.get() == '2017':
+                    status_text.delete('1.0', tk.END)
+                    status_text.insert(tk.END, "Displaying Traffic\nVolume of 2017")
+                    Rf.RightFrame.build_frame("no_filter", 'TrafficFlow2017')
+                elif year_combo.get() == '2018':
+                    status_text.delete('1.0', tk.END)
+                    status_text.insert(tk.END, "Displaying Traffic\nVolume of 2018")
+                    Rf.RightFrame.build_frame("no_filter", 'TrafficFlow2018')
+            else:
+                status_text.delete('1.0', tk.END)
+                status_text.insert(tk.END, "Error")
+
+        read_btn = tk.Button(self, text="Read", width=10, command=read_cmd)
         read_btn.grid(row=2, column=0)
 
         sort_btn = tk.Button(self, text="Sort", width=10)
@@ -36,6 +55,8 @@ class LeftFrame(tk.Frame):
         status_label = tk.Label(self, text="Status:")
         status_label.grid(row=6, column=0)
 
-        status_text = tk.Text(self, width=10, height=2)
+        status_text = tk.Text(self, width=20, height=2)
         status_text.grid(row=7, column=0)
+
+
 

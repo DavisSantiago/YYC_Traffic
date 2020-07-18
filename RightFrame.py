@@ -10,8 +10,10 @@ class RightFrame(tk.Frame):
         self.build_frame()
 
     @staticmethod
-    def build_frame():
-        results = Db.Query().query()
-        tree = Tb.TableBuilder(results).build_table_flow()
-        tree.pack(fill='both', expand=True)
+    def build_frame(table=None, collection=None):
+        # If no argument passed to the method it will be a blank screen
+        if table is not None:
+            results = Db.Query().query(collection)
+            tree = Tb.TableBuilder(results).build_table_flow()
+            tree.pack(fill='both', expand=True)
 

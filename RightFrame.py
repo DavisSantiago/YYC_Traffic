@@ -10,26 +10,43 @@ class RightFrame(tk.Frame):
         self.build_frame()
 
     @staticmethod
-    def build_frame(table=None, collection=None, year=None):
+    def build_frame(sort=None, collection=None, year=None):
         # If no argument passed to the method it will be a blank screen
-        if table is None or collection is None:
+        if sort is None or collection is None:
             # TODO clear screen before printing new table
             pass
 
-        elif table is not None and collection.startswith('TrafficFlow'):
-            results = Db.Query().query(collection)
-            tree = Tb.TableBuilder(results).build_table_flow("volume")
-            tree.pack(fill='both', expand=True)
+        elif sort is not None and collection.startswith('TrafficFlow'):
+            if sort == 'sorted':
+                results = Db.Query().query(collection)
+                tree = Tb.TableBuilder(results).build_table_flow("volume", year, 'sorted')
+                tree.pack(fill='both', expand=True)
+            else:
+                results = Db.Query().query(collection)
+                tree = Tb.TableBuilder(results).build_table_flow("volume")
+                tree.pack(fill='both', expand=True)
 
-        elif table is not None and collection.startswith('TrafficIncidents'):
+        elif sort is not None and collection.startswith('TrafficIncidents'):
             results = Db.Query().query(collection)
             if year == '2016':
-                tree = Tb.TableBuilder(results).build_table_flow("incidents", '2016')
-                tree.pack(fill='both', expand=True)
+                if sort == 'sorted':
+                    tree = Tb.TableBuilder(results).build_table_flow("incidents", '2016', 'sorted')
+                    tree.pack(fill='both', expand=True)
+                else:
+                    tree = Tb.TableBuilder(results).build_table_flow("incidents", '2016')
+                    tree.pack(fill='both', expand=True)
             elif year == '2017':
-                tree = Tb.TableBuilder(results).build_table_flow("incidents", '2017')
-                tree.pack(fill='both', expand=True)
+                if sort == 'sorted':
+                    tree = Tb.TableBuilder(results).build_table_flow("incidents", '2017', 'sorted')
+                    tree.pack(fill='both', expand=True)
+                else:
+                    tree = Tb.TableBuilder(results).build_table_flow("incidents", '2017')
+                    tree.pack(fill='both', expand=True)
             elif year == '2018':
-                tree = Tb.TableBuilder(results).build_table_flow("incidents", '2018')
-                tree.pack(fill='both', expand=True)
+                if sort == 'sorted':
+                    tree = Tb.TableBuilder(results).build_table_flow("incidents", '2018', 'sorted')
+                    tree.pack(fill='both', expand=True)
+                else:
+                    tree = Tb.TableBuilder(results).build_table_flow("incidents", '2018')
+                    tree.pack(fill='both', expand=True)
 

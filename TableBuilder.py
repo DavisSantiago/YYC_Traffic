@@ -6,9 +6,9 @@ class TableBuilder:
     def __init__(self, results):
         self.results = results
 
-    def build_table_flow(self, data, year=None):
+    def build_table_flow(self, data, year=None, sort=None):
 
-        if data == "incidents" and year != None:
+        if data == "incidents":
             table_incidents = []
 
             for item in self.results:
@@ -16,6 +16,11 @@ class TableBuilder:
                     table_incidents.append((item["address"], item["description"], item["start_time"], item["modified_time"],
                                             item["quadrant"], item["longitude"], item["latitude"], item["location"],
                                             item["count"], item["id"]))
+
+            # TODO this is sorting by date just to be able to check that it works, we will need to change it
+            if sort == 'sorted':
+                temp = table_incidents.copy()
+                table_incidents = sorted(temp, key=lambda x: x[0], reverse=True)
 
             tree = ttk.Treeview(column=("Address", "Description", "Start Time", "Modified Time", "Quadrant",
                                         "Longitude", "Latitude", "Location", "Count", "ID"), show='headings')
@@ -49,6 +54,10 @@ class TableBuilder:
             for item in self.results:
                 table_volume.append(
                     (item["segment"], item["coordinates"], item["year"], item["length"], item["volume"]))
+
+            if sort == 'sorted':
+                temp = table_volume.copy()
+                table_volume = sorted(temp, key=lambda x: x[4], reverse=True)
 
             tree = ttk.Treeview(column=("Segment", "Coordinates", "Year", "Length", "Volume"), show='headings')
             tree.heading("Segment", text="Segment")

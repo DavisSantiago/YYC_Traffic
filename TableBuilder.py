@@ -12,12 +12,15 @@ class TableBuilder:
             table_incidents = []
 
             for item in self.results:
+                # Selects only rows where the column start_time contains the year passed as an argument
                 if year in item["start_time"]:
                     table_incidents.append((item["address"], item["description"], item["start_time"], item["modified_time"],
                                             item["quadrant"], item["longitude"], item["latitude"], item["location"],
                                             item["count"], item["id"]))
 
             # TODO this is sorting by date just to be able to check that it works, we will need to change it
+            # If read button clicked it will skip this
+            # If sort button selected it will sort the same way that we had done it in our test file
             if sort == 'sorted':
                 temp = table_incidents.copy()
                 table_incidents = sorted(temp, key=lambda x: x[0], reverse=True)
@@ -35,7 +38,9 @@ class TableBuilder:
             tree.heading("Count", text="Count")
             tree.heading("ID", text="ID")
 
-            # TODO center data
+            # TODO center data and adjust column size
+            # We need to center the data like you did for the other table, but I wasn't sure to which columns to do it
+            # We also need to figure out a way to show all the columns in the window
 
             # me messing around and figured out how to change colors of the headers lol
             style = ttk.Style()
@@ -55,8 +60,10 @@ class TableBuilder:
                 table_volume.append(
                     (item["segment"], item["coordinates"], item["year"], item["length"], item["volume"]))
 
+            # If read button clicked it will skip this
             if sort == 'sorted':
                 temp = table_volume.copy()
+                # Sorting by volume, which is column 4
                 table_volume = sorted(temp, key=lambda x: x[4], reverse=True)
 
             tree = ttk.Treeview(column=("Segment", "Coordinates", "Year", "Length", "Volume"), show='headings')

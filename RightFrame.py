@@ -11,27 +11,35 @@ class RightFrame(tk.Frame):
 
     @staticmethod
     def build_frame(sort=None, collection=None, year=None):
-        # If no argument passed to the method it will be a blank screen
+
         if sort is None or collection is None:
             # TODO clear screen before printing new table
+            # I wrote this to do here but I can't figure out how or where to do this
             pass
 
+        # If the collection is for Volume
         elif sort is not None and collection.startswith('TrafficFlow'):
+            # If button sort clicked it will do this
             if sort == 'sorted':
                 results = Db.Query().query(collection)
                 tree = Tb.TableBuilder(results).build_table_flow("volume", year, 'sorted')
                 tree.pack(fill='both', expand=True)
+            # If button read clicked it will do this
             else:
                 results = Db.Query().query(collection)
                 tree = Tb.TableBuilder(results).build_table_flow("volume")
                 tree.pack(fill='both', expand=True)
 
+        # If collection is for Incidents
         elif sort is not None and collection.startswith('TrafficIncidents'):
             results = Db.Query().query(collection)
+            # Because all the information comes from the same file here is where the data gets filtered for each year
             if year == '2016':
+                # If button sort clicked it will go this
                 if sort == 'sorted':
                     tree = Tb.TableBuilder(results).build_table_flow("incidents", '2016', 'sorted')
                     tree.pack(fill='both', expand=True)
+                # If button read clicked it will do this
                 else:
                     tree = Tb.TableBuilder(results).build_table_flow("incidents", '2016')
                     tree.pack(fill='both', expand=True)

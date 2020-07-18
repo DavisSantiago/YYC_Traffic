@@ -22,11 +22,16 @@ class LeftFrame(tk.Frame):
         year_combo = ttk.Combobox(self, values=('2016', '2017', '2018'))
         year_combo.grid(row=1, column=1)
 
+        # Event listener for read button
         def read_cmd():
             if type_combo.get() == 'Traffic Volume':
                 if year_combo.get() == '2016':
+                    # Clears the previous message
                     status_text.delete('1.0', tk.END)
+                    # Message that helped me check what I was doing, we don't necessarily need to display this
                     status_text.insert(tk.END, "Displaying Traffic\nVolume of 2016")
+                    # Builds frame, no filter means the data will be displayed as it is on the file
+                    # Because this button is for read only, all the method calls will have this no filter
                     Rf.RightFrame.build_frame("no_filter", 'TrafficFlow2016')
                 elif year_combo.get() == '2017':
                     status_text.delete('1.0', tk.END)
@@ -36,13 +41,17 @@ class LeftFrame(tk.Frame):
                     status_text.delete('1.0', tk.END)
                     status_text.insert(tk.END, "Displaying Traffic\nVolume of 2018")
                     Rf.RightFrame.build_frame("no_filter", 'TrafficFlow2018')
+                # If there is no year selected
                 else:
                     status_text.delete('1.0', tk.END)
                     status_text.insert(tk.END, "Please select a year")
+
             elif type_combo.get() == 'Traffic Accidents':
                 if year_combo.get() == '2016':
                     status_text.delete('1.0', tk.END)
                     status_text.insert(tk.END, "Displaying Traffic\nAccidents of 2016")
+                    # I pulled all the data from the same file, we can delete the other ones from out database
+                    # The added argument filters, from the file, only data that happened in that year
                     Rf.RightFrame.build_frame("no_filter", 'TrafficIncidents', '2016')
                 elif year_combo.get() == '2017':
                     status_text.delete('1.0', tk.END)
@@ -55,6 +64,7 @@ class LeftFrame(tk.Frame):
                 else:
                     status_text.delete('1.0', tk.END)
                     status_text.insert(tk.END, "Please select a year")
+            # If year selected but not type
             else:
                 status_text.delete('1.0', tk.END)
                 status_text.insert(tk.END, "Please select Volume\nor Accidents")
@@ -62,11 +72,14 @@ class LeftFrame(tk.Frame):
         read_btn = tk.Button(self, text="Read", width=10, command=read_cmd)
         read_btn.grid(row=2, column=0)
 
+        # Event listener for sort button
         def sort_cmd():
             if type_combo.get() == 'Traffic Volume':
                 if year_combo.get() == '2016':
                     status_text.delete('1.0', tk.END)
                     status_text.insert(tk.END, "Displaying Traffic\nVolume of 2016\nSorted by Volume")
+                    # For all the method calls to build frame in sort button
+                    # the argument sorted will return sorted data
                     Rf.RightFrame.build_frame('sorted', 'TrafficFlow2016', '2016')
                 elif year_combo.get() == '2017':
                     status_text.delete('1.0', tk.END)

@@ -9,8 +9,9 @@ class RightFrame(tk.Frame):
         super().__init__(**kw)
         self.build_frame()
 
-    def build_frame(self):
+    @staticmethod
+    def build_frame():
         results = Db.Query().query()
         tree = Tb.TableBuilder(results).build_table_flow()
-        tree.grid(row=2, column=2)
+        tree.pack(fill='both', expand=True)
 

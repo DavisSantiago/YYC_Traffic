@@ -37,8 +37,25 @@ class LeftFrame(tk.Frame):
                     status_text.delete('1.0', tk.END)
                     status_text.insert(tk.END, "Displaying Traffic\nVolume of 2018")
                     Rf.RightFrame.build_frame("no_filter", 'TrafficFlow2018')
+                else:
+                    status_text.delete('1.0', tk.END)
+                    status_text.insert(tk.END, "Please select a year")
             elif type_combo.get() == 'Traffic Accidents':
-                Rf.RightFrame.build_frame("no_filter", 'TrafficIncidents')
+                if year_combo.get() == '2016':
+                    status_text.delete('1.0', tk.END)
+                    status_text.insert(tk.END, "Displaying Traffic\nAccidents of 2016")
+                    Rf.RightFrame.build_frame("no_filter", 'TrafficIncidents', '2016')
+                elif year_combo.get() == '2017':
+                    status_text.delete('1.0', tk.END)
+                    status_text.insert(tk.END, "Displaying Traffic\nAccidents of 2017")
+                    Rf.RightFrame.build_frame("no_filter", 'TrafficIncidents', '2017')
+                elif year_combo.get() == '2018':
+                    status_text.delete('1.0', tk.END)
+                    status_text.insert(tk.END, "Displaying Traffic\nAccidents of 2018")
+                    Rf.RightFrame.build_frame("no_filter", 'TrafficIncidents', '2018')
+                else:
+                    status_text.delete('1.0', tk.END)
+                    status_text.insert(tk.END, "Please select a year")
             else:
                 status_text.delete('1.0', tk.END)
                 status_text.insert(tk.END, "Error")

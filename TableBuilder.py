@@ -53,15 +53,25 @@ class TableBuilder:
                 tree = ttk.Treeview(column=("Address", "Description", "Start Time", "Modified Time", "Quadrant",
                                             "Longitude", "Latitude", "Location", "Count", "ID"), show='headings')
                 tree.heading("Address", text="Address")
+                tree.column("Address", width=150)
                 tree.heading("Description", text="Description")
+                tree.column("Description", width=100)
                 tree.heading("Start Time", text="Start Time")
+                tree.column("Start Time", width=100)
                 tree.heading("Modified Time", text="Modified Time")
+                tree.column("Modified Time", width=100)
                 tree.heading("Quadrant", text="Quadrant")
+                tree.column("Quadrant", width=40)
                 tree.heading("Longitude", text="Longitude")
+                tree.column("Longitude", width=100)
                 tree.heading("Latitude", text="Latitude")
+                tree.column("Latitude", width=100)
                 tree.heading("Location", text="Location")
+                tree.column("Location", width=100)
                 tree.heading("Count", text="Count")
+                tree.column("Count", width=25)
                 tree.heading("ID", text="ID")
+                tree.column("ID", width=30)
 
             # TODO center data and adjust column size
             # We need to center the data like you did for the other table, but I wasn't sure to which columns to do it

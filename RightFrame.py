@@ -9,8 +9,7 @@ class RightFrame(tk.Frame):
         super().__init__(**kw)
         self.build_frame()
 
-    @staticmethod
-    def build_frame(sort=None, collection=None, year=None):
+    def build_frame(self, sort=None, collection=None, year=None):
 
         if sort is None or collection is None:
             # TODO clear screen before printing new table

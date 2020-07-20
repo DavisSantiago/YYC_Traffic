@@ -84,7 +84,7 @@ class LeftFrame(tk.Frame):
                 status_text.delete('1.0', tk.END)
                 status_text.insert(tk.END, "Please select Volume\nor Accidents")
 
-        read_btn = tk.Button(self, text="Read", width=10, command=read_cmd)
+        read_btn = tk.Button(self, text="Read", width=19, command=read_cmd)
         read_btn.pack()
 
         # Event listener for sort button
@@ -139,13 +139,13 @@ class LeftFrame(tk.Frame):
                 status_text.delete('1.0', tk.END)
                 status_text.insert(tk.END, "Please select Volume\nor Accidents")
 
-        sort_btn = tk.Button(self, text="Sort", width=10, command=sort_cmd)
+        sort_btn = tk.Button(self, text="Sort", width=19, command=sort_cmd)
         sort_btn.pack()
 
-        analysis_btn = tk.Button(self, text="Analysis", width=10)
+        analysis_btn = tk.Button(self, text="Analysis", width=19)
         analysis_btn.pack()
 
-        map_btn = tk.Button(self, text="Map", width=10)
+        map_btn = tk.Button(self, text="Map", width=19)
         map_btn.pack()
 
         status_label = tk.Label(self, text="Status:")

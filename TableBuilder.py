@@ -3,8 +3,9 @@ from tkinter import ttk
 
 class TableBuilder:
 
-    def __init__(self, results):
+    def __init__(self, master, results):
         self.results = results
+        self.master = master
 
     def build_table_flow(self, data, year=None, sort=None):
         if data == "incidents":
@@ -33,7 +34,7 @@ class TableBuilder:
                 # Sorting by number of accidents
                 table_incidents = sorted(table, key=lambda x: x[1], reverse=True)
 
-                tree = ttk.Treeview(column=("Address", "Count"), show='headings')
+                tree = ttk.Treeview(master=self.master, column=("Address", "Count"), show='headings')
                 tree.heading("Address", text="Address")
                 tree.heading("Count", text="Count")
 
@@ -50,7 +51,7 @@ class TableBuilder:
                     temp = table_incidents.copy()
                     table_incidents = sorted(temp, key=lambda x: x[0], reverse=True)
 
-                tree = ttk.Treeview(column=("Address", "Description", "Start Time", "Modified Time", "Quadrant",
+                tree = ttk.Treeview(master=self.master, column=("Address", "Description", "Start Time", "Modified Time", "Quadrant",
                                             "Longitude", "Latitude", "Location", "Count", "ID"), show='headings')
                 tree.heading("Address", text="Address")
                 tree.column("Address", width=150)
@@ -101,7 +102,7 @@ class TableBuilder:
                 # Sorting by volume, which is column 4
                 table_volume = sorted(temp, key=lambda x: x[4], reverse=True)
 
-            tree = ttk.Treeview(column=("Segment", "Coordinates", "Year", "Length", "Volume"), show='headings')
+            tree = ttk.Treeview(master=self.master, column=("Segment", "Coordinates", "Year", "Length", "Volume"), show='headings')
             tree.heading("Segment", text="Segment")
             tree.heading("Coordinates", text="Coordinates")
             tree.heading("Year", text="Year")

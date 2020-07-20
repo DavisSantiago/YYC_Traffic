@@ -8,7 +8,6 @@ class RightFrame(tk.Frame):
     def __init__(self, master, *args, **kwargs):
         tk.Frame.__init__(self, master, *args, **kwargs)
         self.master = master
-        self.pack(fill='both', expand=True)
 
     def build_frame(self, sort=None, collection=None, year=None):
 
@@ -52,5 +51,6 @@ class RightFrame(tk.Frame):
                 else:
                     tree = Tb.TableBuilder(self, results).build_table_flow("incidents", '2018')
                     tree.pack(fill='both', expand=True)
-
         print('right frame children', self.winfo_children())
+        return self
+

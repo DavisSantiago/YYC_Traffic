@@ -12,9 +12,6 @@ class RightFrame(tk.Frame):
 
     def build_frame(self, sort=None, collection=None, year=None):
 
-        for widget in self.winfo_children():
-            widget.destroy()
-
         # If the collection is for Volume
         if sort is not None and collection.startswith('TrafficFlow'):
             # If button sort clicked it will do this
@@ -55,5 +52,5 @@ class RightFrame(tk.Frame):
                 else:
                     tree = Tb.TableBuilder(self, results).build_table_flow("incidents", '2018')
                     tree.pack(fill='both', expand=True)
-        print('left frame parent', self.winfo_parent())
+
         print('right frame children', self.winfo_children())

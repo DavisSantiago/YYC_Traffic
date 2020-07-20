@@ -5,8 +5,8 @@ import RightFrame as Rf
 
 class LeftFrame(tk.Frame):
 
-    def __init__(self, **kw):
-        super().__init__(**kw)
+    def __init__(self, master, *args, **kwargs):
+        tk.Frame.__init__(self, master, *args, **kwargs)
         self.build_frame()
 
     def build_frame(self):

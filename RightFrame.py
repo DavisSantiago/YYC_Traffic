@@ -5,8 +5,8 @@ import DatabaseQuery as Db
 
 class RightFrame(tk.Frame):
 
-    def __init__(self, **kw):
-        super().__init__(**kw)
+    def __init__(self, master, *args, **kw):
+        tk.Frame.__init__(self, master, *args, **kw)
         self.build_frame()
 
     def build_frame(self, sort=None, collection=None, year=None):

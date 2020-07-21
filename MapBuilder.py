@@ -47,6 +47,7 @@ class MapBuilder:
             for item in results:
                 if max_section in item["address"]:
                     location = item["location"]
+                    break
 
             location = location.strip('()')
             lat, long = location.split(',')
@@ -74,10 +75,12 @@ class MapBuilder:
             # extracting the coordinates
             raw_string = table_volume[0][1]
             # formatting the string
+
             strip_chars = string.ascii_uppercase + ")"
             raw_string = raw_string.strip(strip_chars)
             raw_string = raw_string.replace("(", "")
             coord_list = raw_string.split(",")
+
             # creating a list of tuples with all coordinates
             lat_long_list = []
             for coordinate in coord_list:

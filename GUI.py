@@ -16,5 +16,5 @@ if __name__ == "__main__":
     root = tk.Tk()
     MainApplication(root).pack(fill='both', side='left')
     w, h = root.winfo_screenwidth(), root.winfo_screenheight()
-    root.geometry("%dx%d+0+0" % (w, h))
+    root.geometry(("%dx%d+0+0" % (w, h)))
     root.mainloop()

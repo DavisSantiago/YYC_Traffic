@@ -14,6 +14,8 @@ class LeftFrame(tk.Frame):
         self.build_frame()
 
     def build_frame(self):
+        status_msg = tk.StringVar()
+
         type_label = tk.Label(self, text="Choose type of data to visualize:")
         type_label.pack()
 
@@ -31,59 +33,49 @@ class LeftFrame(tk.Frame):
             if type_combo.get() == 'Traffic Volume':
                 if year_combo.get() == '2016':
                     # Clears the previous message
-                    status_text.delete('1.0', tk.END)
-                    # Message that helped me check what I was doing, we don't necessarily need to display this
-                    status_text.insert(tk.END, "Displaying Traffic\nVolume of 2016")
+                    status_msg.set("Successfully read\nfrom Database")
                     # Builds frame, no filter means the data will be displayed as it is on the file
                     # Because this button is for read only, all the method calls will have this no filter
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2016')
                     self.right_frame.pack(fill='both', expand=True)
                 elif year_combo.get() == '2017':
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Displaying Traffic\nVolume of 2017")
+                    status_msg.set("Successfully read\nfrom Database")
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2017')
                     self.right_frame.pack(fill='both', expand=True)
                 elif year_combo.get() == '2018':
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Displaying Traffic\nVolume of 2018")
+                    status_msg.set("Successfully read\nfrom Database")
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2018')
                     self.right_frame.pack(fill='both', expand=True)
                 # If there is no year selected
                 else:
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Please select a year")
+                    status_msg.set("Please select a Year")
 
             elif type_combo.get() == 'Traffic Accidents':
                 if year_combo.get() == '2016':
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Displaying Traffic\nAccidents of 2016")
+                    status_msg.set("Successfully read\nfrom Database")
                     # I pulled all the data from the same file, we can delete the other ones from out database
                     # The added argument filters, from the file, only data that happened in that year
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2016')
                     self.right_frame.pack(fill='both', expand=True)
                 elif year_combo.get() == '2017':
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Displaying Traffic\nAccidents of 2017")
+                    status_msg.set("Successfully read\nfrom Database")
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2017')
                     self.right_frame.pack(fill='both', expand=True)
                 elif year_combo.get() == '2018':
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Displaying Traffic\nAccidents of 2018")
+                    status_msg.set("Successfully read\nfrom Database")
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2018')
                     self.right_frame.pack(fill='both', expand=True)
                 else:
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Please select a year")
+                    status_msg.set("Please select a Year")
             # If year selected but not type
             else:
-                status_text.delete('1.0', tk.END)
-                status_text.insert(tk.END, "Please select Volume\nor Accidents")
+                status_msg.set("Please select Volume\nor Accidents")
 
         read_btn = tk.Button(self, text="Read", width=19, command=read_cmd)
         read_btn.pack()
@@ -92,53 +84,44 @@ class LeftFrame(tk.Frame):
         def sort_cmd():
             if type_combo.get() == 'Traffic Volume':
                 if year_combo.get() == '2016':
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Displaying Traffic\nVolume of 2016\nSorted by Volume")
+                    status_msg.set("Successfully sorted")
                     # For all the method calls to build frame in sort button
                     # the argument sorted will return sorted data
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2016', '2016')
                     self.right_frame.pack(fill='both', expand=True)
                 elif year_combo.get() == '2017':
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Displaying Traffic\nVolume of 2017\nSorted by Volume")
+                    status_msg.set("Successfully sorted")
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2017', '2017')
                     self.right_frame.pack(fill='both', expand=True)
                 elif year_combo.get() == '2018':
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Displaying Traffic\nVolume of 2018\nSorted by Volume")
+                    status_msg.set("Successfully sorted")
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2018', '2018')
                     self.right_frame.pack(fill='both', expand=True)
                 else:
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Please select a year")
+                    status_msg.set("Please select a Year")
             elif type_combo.get() == 'Traffic Accidents':
                 if year_combo.get() == '2016':
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Displaying Traffic\nAccidents of 2016\nSorted by Number of\nIncidents")
+                    status_msg.set("Successfully sorted")
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2016')
                     self.right_frame.pack(fill='both', expand=True)
                 elif year_combo.get() == '2017':
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Displaying Traffic\nAccidents of 2017\nSorted by Number of\nIncidents")
+                    status_msg.set("Successfully sorted")
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2017')
                     self.right_frame.pack(fill='both', expand=True)
                 elif year_combo.get() == '2018':
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Displaying Traffic\nAccidents of 2018\nSorted by Number of\nIncidents")
+                    status_msg.set("Successfully sorted")
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2018')
                     self.right_frame.pack(fill='both', expand=True)
                 else:
-                    status_text.delete('1.0', tk.END)
-                    status_text.insert(tk.END, "Please select a year")
+                    status_msg.set("Please select a Year")
             else:
-                status_text.delete('1.0', tk.END)
-                status_text.insert(tk.END, "Please select Volume\nor Accidents")
+                status_msg.set("Please select Volume\nor Accidents")
 
         sort_btn = tk.Button(self, text="Sort", width=19, command=sort_cmd)
         sort_btn.pack()
@@ -157,10 +140,10 @@ class LeftFrame(tk.Frame):
         map_btn = tk.Button(self, text="Map", width=19)
         map_btn.pack()
 
-        status_label = tk.Label(self, text="Status:")
+        status_label = tk.Label(self, font=("Calibri", 12, 'bold'), text="Status:")
         status_label.pack()
 
-        status_text = tk.Text(self, width=20, height=4)
+        status_text = tk.Label(self, textvariable=status_msg, width=20, height=4)
         status_text.pack()
 
 

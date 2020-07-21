@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import RightFrame as Rf
+import GraphBuilder as Gb
 
 
 class LeftFrame(tk.Frame):
@@ -142,7 +143,15 @@ class LeftFrame(tk.Frame):
         sort_btn = tk.Button(self, text="Sort", width=19, command=sort_cmd)
         sort_btn.pack()
 
-        analysis_btn = tk.Button(self, text="Analysis", width=19)
+        def analysis_cmd():
+            if type_combo.get() == 'Traffic Volume':
+                status_text.delete('1.0', tk.END)
+                status_text.insert(tk.END, "Volume graph")
+                self.right_frame.destroy()
+                self.right_frame = Gb.GraphBuilder(self.root).build_graph('traffic')
+                self.right_frame.pack(fill='both', expand=True)
+
+        analysis_btn = tk.Button(self, text="Analysis", width=19, command=analysis_cmd)
         analysis_btn.pack()
 
         map_btn = tk.Button(self, text="Map", width=19)

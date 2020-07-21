@@ -1,5 +1,7 @@
 import folium
+import string
 import DatabaseQuery as Db
+
 
 class MapBuilder:
 
@@ -10,13 +12,10 @@ class MapBuilder:
 
     def build_map(self):
 
-        # query the database based on the parameters passed, will be factored out to its own method later
-        results = Db.Query().query(self.collection)
-        # for item in results:
-        #     print(item)
-
         if self.data == "incidents":
             table_incidents = []
+
+            results = Db.Query().query(self.collection)
 
             for item in results:
                 # Selects only rows where the column start_time contains the year passed as an argument
@@ -44,6 +43,7 @@ class MapBuilder:
             # had to query again for some reason, only way i could get it to work to retrieve the coordinates
             results = Db.Query().query(self.collection)
             location = ''
+
             for item in results:
                 if max_section in item["address"]:
                     location = item["location"]
@@ -60,8 +60,38 @@ class MapBuilder:
             ).add_to(m)
             m.save("IncidentMap.html")
 
+        elif self.data == "volume":
+            table_volume = []
+            results = Db.Query().query(self.collection)
+            for item in results:
+                table_volume.append(
+                    (item["segment"], item["coordinates"], item["year"], item["length"], item["volume"]))
+
+                temp = table_volume.copy()
+                # Sorting by volume, which is column 4
+                table_volume = sorted(temp, key=lambda x: x[4], reverse=True)
+
+            # extracting the coordinates
+            raw_string = table_volume[0][1]
+            # formatting the string
+            strip_chars = string.ascii_uppercase + ")"
+            raw_string = raw_string.strip(strip_chars)
+            raw_string = raw_string.replace("(", "")
+            coord_list = raw_string.split(",")
+            # creating a list of tuples with all coordinates
+            lat_long_list = []
+            for coordinate in coord_list:
+                long, lat = coordinate.split()
+                lat_long_list.append((float(lat), float(long)))
+
+            # plotting the map
+            m = folium.Map(location=[lat_long_list[0][0], lat_long_list[0][1]], zoom_start=14)
+            folium.PolyLine(lat_long_list, weight=8).add_to(m)
+            folium.Marker(lat_long_list[0], popup=table_volume[0][0] + " Volume = " + str(table_volume[0][4])).add_to(m)
+            m.save("VolumeMap.html")
+
 
 if __name__ == '__main__':
-    map_test = MapBuilder("TrafficIncidents", data="incidents", year="2016").build_map()
+    MapBuilder("TrafficFlow2018", data="volume", year="2016").build_map()
 
 

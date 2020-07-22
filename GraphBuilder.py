@@ -21,7 +21,7 @@ class GraphBuilder:
 
     def build_graph(self, data):
         if data == "volume":
-            years = {'2016': 'TrafficFlow2016', '2017': 'TrafficFlow2017', '2018': 'TrafficFlow2018'}
+            years = {"2016": "TrafficFlow2016", "2017": "TrafficFlow2017", "2018": "TrafficFlow2018"}
             year_max = []
             year_list = []
 
@@ -48,16 +48,16 @@ class GraphBuilder:
             incidents_2017 = []
             incidents_2018 = []
             max_incidents_per_year = []
-            year = ['2016', '2017', '2018']
+            year = ["2016", "2017", "2018"]
 
-            results = Db.Query().query('TrafficIncidents')
+            results = Db.Query().query("TrafficIncidents")
 
             for item in results:
-                if '2016' in item["start_time"]:
+                if "2016" in item["start_time"]:
                     incidents_2016.append((item["address"]))
-                if '2017' in item["start_time"]:
+                if "2017" in item["start_time"]:
                     incidents_2017.append((item["address"]))
-                if '2018' in item["start_time"]:
+                if "2018" in item["start_time"]:
                     incidents_2018.append((item["address"]))
 
             max_incidents_per_year.append(max(self.sum_incidents(incidents_2016).values()))

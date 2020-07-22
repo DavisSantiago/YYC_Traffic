@@ -21,22 +21,22 @@ class MapBuilder:
 
             # had to query again for some reason, only way i could get it to work to retrieve the coordinates
             results = Db.Query().query(self.collection)
-            location = ''
+            location = ""
 
             for item in results:
                 if max_section in item["address"]:
                     location = item["location"]
                     break
 
-            location = location.strip('()')
-            lat, long = location.split(',')
+            location = location.strip("()")
+            lat, long = location.split(",")
             lat, long = float(lat), float(long)
 
             m = folium.Map(location=[lat, long], zoom_start=15)
             folium.Marker(
                 location=[lat, long],
                 popup="Number of Incidents = " + str(num_accidents),
-                icon=folium.Icon(color='red', icon='info-sign')
+                icon=folium.Icon(color="red", icon="info-sign")
             ).add_to(m)
             m.save("IncidentMap.html")
 

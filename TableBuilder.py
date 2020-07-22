@@ -13,7 +13,7 @@ class TableBuilder:
             if sort:
                 table_incidents = Lb.ListBuilder.build_list(data, collection, year, sort=True)
 
-                tree = ttk.Treeview(master=self.master, column=("Address", "Count"), show='headings')
+                tree = ttk.Treeview(master=self.master, column=("Address", "Count"), show="headings")
                 tree.heading("Address", text="Address")
                 tree.heading("Count", text="Count")
 
@@ -21,7 +21,7 @@ class TableBuilder:
                 table_incidents = Lb.ListBuilder.build_list(data, collection, year)
 
                 tree = ttk.Treeview(master=self.master, column=("Address", "Description", "Start Time", "Modified Time", "Quadrant",
-                                            "Longitude", "Latitude", "Location", "Count", "ID"), show='headings')
+                                            "Longitude", "Latitude", "Location", "Count", "ID"), show="headings")
                 tree.heading("Address", text="Address")
                 tree.column("Address", width=150)
                 tree.heading("Description", text="Description")
@@ -45,7 +45,7 @@ class TableBuilder:
 
             # me messing around and figured out how to change colors of the headers lol
             style = ttk.Style()
-            style.configure('Treeview.Heading', font=('Calibri', 13, 'bold'))
+            style.configure("Treeview.Heading", font=("Calibri", 13, "bold"))
 
             i = 0
             for row in table_incidents:
@@ -60,7 +60,7 @@ class TableBuilder:
             else:
                 table_volume = Lb.ListBuilder.build_list(data, collection)
 
-            tree = ttk.Treeview(master=self.master, column=("Segment", "Coordinates", "Year", "Length", "Volume"), show='headings')
+            tree = ttk.Treeview(master=self.master, column=("Segment", "Coordinates", "Year", "Length", "Volume"), show="headings")
             tree.heading("Segment", text="Segment")
             tree.heading("Coordinates", text="Coordinates")
             tree.heading("Year", text="Year")
@@ -68,13 +68,13 @@ class TableBuilder:
             tree.heading("Volume", text="Volume")
 
             # centering the data for these three columns
-            tree.column("Year", anchor='n')
-            tree.column("Length", anchor='n')
-            tree.column("Volume", anchor='n')
+            tree.column("Year", anchor="n")
+            tree.column("Length", anchor="n")
+            tree.column("Volume", anchor="n")
 
             # me messing around and figured out how to change colors of the headers lol
             style = ttk.Style()
-            style.configure('Treeview.Heading', font=('Calibri', 13, 'bold'))
+            style.configure("Treeview.Heading", font=("Calibri", 13, "bold"))
 
             i = 0
             for row in table_volume:

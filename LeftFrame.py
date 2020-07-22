@@ -15,20 +15,6 @@ class LeftFrame(tk.Frame):
         self.build_frame()
 
     def build_frame(self):
-        status_msg = tk.StringVar()
-
-        type_label = tk.Label(self, text="Choose type of data to visualize:")
-        type_label.pack()
-
-        type_combo = ttk.Combobox(self, values=('Traffic Accidents', 'Traffic Volume'))
-        type_combo.pack()
-
-        year_label = tk.Label(self, text="Choose a year:")
-        year_label.pack()
-
-        year_combo = ttk.Combobox(self, values=('2016', '2017', '2018'))
-        year_combo.pack()
-
         # Event listener for read button
         def read_cmd():
             if type_combo.get() == 'Traffic Volume':
@@ -78,9 +64,6 @@ class LeftFrame(tk.Frame):
             else:
                 status_msg.set("Please select Volume\nor Accidents")
 
-        read_btn = tk.Button(self, text="Read", width=19, command=read_cmd)
-        read_btn.pack()
-
         # Event listener for sort button
         def sort_cmd():
             if type_combo.get() == 'Traffic Volume':
@@ -124,20 +107,17 @@ class LeftFrame(tk.Frame):
             else:
                 status_msg.set("Please select Volume\nor Accidents")
 
-        sort_btn = tk.Button(self, text="Sort", width=19, command=sort_cmd)
-        sort_btn.pack()
-
         def analysis_cmd():
             if type_combo.get() == 'Traffic Volume':
                 self.right_frame.destroy()
                 self.right_frame = Gb.GraphBuilder(self.root).build_graph('traffic')
                 self.right_frame.pack(fill='both', expand=True)
-                print(type(self.right_frame))
+                status_msg.set("Successfully analyzed")
             elif type_combo.get() == 'Traffic Accidents':
                 self.right_frame.destroy()
                 self.right_frame = Gb.GraphBuilder(self.root).build_graph('accidents')
                 self.right_frame.pack(fill='both', expand=True)
-                print(type(self.right_frame))
+                status_msg.set("Successfully analyzed")
 
         def map_cmd():
             if type_combo.get() == 'Traffic Volume':
@@ -161,6 +141,26 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == '2018':
                     Mb.MapBuilder('TrafficIncidents', 'incidents', year='2018').build_map()
                     status_msg.set('Map file successfully\n written')
+
+        status_msg = tk.StringVar()
+
+        type_label = tk.Label(self, text="Choose type of data to visualize:")
+        type_label.pack()
+
+        type_combo = ttk.Combobox(self, values=('Traffic Accidents', 'Traffic Volume'))
+        type_combo.pack()
+
+        year_label = tk.Label(self, text="Choose a year:")
+        year_label.pack()
+
+        year_combo = ttk.Combobox(self, values=('2016', '2017', '2018'))
+        year_combo.pack()
+
+        read_btn = tk.Button(self, text="Read", width=19, command=read_cmd)
+        read_btn.pack()
+
+        sort_btn = tk.Button(self, text="Sort", width=19, command=sort_cmd)
+        sort_btn.pack()
 
         analysis_btn = tk.Button(self, text="Analysis", width=19, command=analysis_cmd)
         analysis_btn.pack()

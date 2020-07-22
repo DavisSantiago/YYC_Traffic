@@ -131,8 +131,24 @@ class LeftFrame(tk.Frame):
             if type_combo.get() == 'Traffic Volume':
                 status_text.delete('1.0', tk.END)
                 status_text.insert(tk.END, "Volume graph")
+                if isinstance(self.right_frame, Gb.GraphBuilder):
+                    print("Graph")
+                    Gb.GraphBuilder.delete(self.right_frame)
+                else:
+                    print("Not graph")
                 self.right_frame.destroy()
                 self.right_frame = Gb.GraphBuilder(self.root).build_graph('traffic')
+                self.right_frame.pack(fill='both', expand=True)
+            elif type_combo.get() == 'Traffic Accidents':
+                status_text.delete('1.0', tk.END)
+                status_text.insert(tk.END, "Incidents graph")
+                if isinstance(self.right_frame, Gb.GraphBuilder):
+                    print("Graph")
+                    Gb.GraphBuilder.delete(self.right_frame)
+                else:
+                    print("Not graph")
+                self.right_frame.destroy()
+                self.right_frame = Gb.GraphBuilder(self.root).build_graph('accidents')
                 self.right_frame.pack(fill='both', expand=True)
 
         def map_cmd():

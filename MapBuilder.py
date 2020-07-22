@@ -1,6 +1,7 @@
 import folium
 import string
 import DatabaseQuery as Db
+import ListBuilder as Lb
 
 
 class MapBuilder:
@@ -13,33 +14,11 @@ class MapBuilder:
     def build_map(self):
 
         if self.data == "incidents":
-            table_incidents = []
-
-            results = Db.Query().query(self.collection)
-
-            for item in results:
-                # Selects only rows where the column start_time contains the year passed as an argument
-                if self.year in item["start_time"]:
-                    table_incidents.append((item["address"]))
-
-            # Empty dictionary to count the accidents per intersection
-            accident_count = {}
-            # Iterating through every address
-            for address in table_incidents:
-                if address not in accident_count:
-                    # I tried to do the .get(address, 0) + 1 but for some reason it didn't work
-                    accident_count[address] = 1
-                else:
-                    accident_count[address] += 1
-
-            # Making the dictionary a list of tuples
-            temp = accident_count.items()
-            table = list(temp)
-            # Sorting by number of accidents
-            table_incidents = sorted(table, key=lambda x: x[1], reverse=True)
+            table_incidents = Lb.ListBuilder.build_list(self.data, self.collection, self.year, sort=True)
 
             max_section = table_incidents[0][0]
             num_accidents = table_incidents[0][1]
+
             # had to query again for some reason, only way i could get it to work to retrieve the coordinates
             results = Db.Query().query(self.collection)
             location = ''
@@ -62,15 +41,7 @@ class MapBuilder:
             m.save("IncidentMap.html")
 
         elif self.data == "volume":
-            table_volume = []
-            results = Db.Query().query(self.collection)
-            for item in results:
-                table_volume.append(
-                    (item["segment"], item["coordinates"], item["year"], item["length"], item["volume"]))
-
-                temp = table_volume.copy()
-                # Sorting by volume, which is column 4
-                table_volume = sorted(temp, key=lambda x: x[4], reverse=True)
+            table_volume = Lb.ListBuilder.build_list(self.data, self.collection, self.year, sort=True)
 
             # extracting the coordinates
             raw_string = table_volume[0][1]
@@ -92,9 +63,3 @@ class MapBuilder:
             folium.PolyLine(lat_long_list, weight=8).add_to(m)
             folium.Marker(lat_long_list[0], popup=table_volume[0][0] + " Volume = " + str(table_volume[0][4])).add_to(m)
             m.save("VolumeMap.html")
-
-
-if __name__ == '__main__':
-    MapBuilder("TrafficIncidents", data="incidents", year="2016").build_map()
-
-

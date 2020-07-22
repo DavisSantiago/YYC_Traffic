@@ -1,5 +1,6 @@
 import DatabaseQuery as Db
 
+
 class ListBuilder:
 
     @staticmethod

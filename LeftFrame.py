@@ -1,5 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
+
+from pymongo.errors import OperationFailure
+
 import RightFrame as Rf
 import GraphBuilder as Gb
 import MapBuilder as Mb
@@ -23,19 +26,28 @@ class LeftFrame(tk.Frame):
                     # Builds frame, no filter means the data will be displayed as it is on the file
                     # Because this button is for read only, all the method calls will have this no filter
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2016')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully read\nfrom Database")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2016')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully read\nfrom Database")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 elif year_combo.get() == '2017':
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2017')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully read\nfrom Database")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2017')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully read\nfrom Database")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 elif year_combo.get() == '2018':
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2018')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully read\nfrom Database")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2018')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully read\nfrom Database")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 # If there is no year selected
                 else:
                     status_msg.set("Please select a Year")
@@ -45,19 +57,28 @@ class LeftFrame(tk.Frame):
                     # I pulled all the data from the same file, we can delete the other ones from out database
                     # The added argument filters, from the file, only data that happened in that year
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2016')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully read\nfrom Database")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2016')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully read\nfrom Database")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 elif year_combo.get() == '2017':
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2017')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully read\nfrom Database")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2017')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully read\nfrom Database")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 elif year_combo.get() == '2018':
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2018')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully read\nfrom Database")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2018')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully read\nfrom Database")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 else:
                     status_msg.set("Please select a Year")
             # If year selected but not type
@@ -71,37 +92,55 @@ class LeftFrame(tk.Frame):
                     # For all the method calls to build frame in sort button
                     # the argument sorted will return sorted data
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2016', '2016')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully sorted")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2016', '2016')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully sorted")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 elif year_combo.get() == '2017':
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2017', '2017')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully sorted")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2017', '2017')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully sorted")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 elif year_combo.get() == '2018':
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2018', '2018')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully sorted")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2018', '2018')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully sorted")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 else:
                     status_msg.set("Please select a Year")
             elif type_combo.get() == 'Traffic Accidents':
                 if year_combo.get() == '2016':
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2016')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully sorted")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2016')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully sorted")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 elif year_combo.get() == '2017':
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2017')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully sorted")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2017')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully sorted")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 elif year_combo.get() == '2018':
                     self.right_frame.destroy()
-                    self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2018')
-                    self.right_frame.pack(fill='both', expand=True)
-                    status_msg.set("Successfully sorted")
+                    try:
+                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2018')
+                        self.right_frame.pack(fill='both', expand=True)
+                        status_msg.set("Successfully sorted")
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating table")
                 else:
                     status_msg.set("Please select a Year")
             else:
@@ -110,37 +149,61 @@ class LeftFrame(tk.Frame):
         def analysis_cmd():
             if type_combo.get() == 'Traffic Volume':
                 self.right_frame.destroy()
-                self.right_frame = Gb.GraphBuilder(self.root).build_graph("volume")
-                self.right_frame.pack(fill='both', expand=True)
-                status_msg.set("Successfully analyzed")
+                try:
+                    self.right_frame = Gb.GraphBuilder(self.root).build_graph("volume")
+                    self.right_frame.pack(fill='both', expand=True)
+                    status_msg.set("Successfully analyzed")
+                except OperationFailure:
+                    status_msg.set("An error occurred\nwhile creating plot")
             elif type_combo.get() == 'Traffic Accidents':
                 self.right_frame.destroy()
-                self.right_frame = Gb.GraphBuilder(self.root).build_graph("incidents")
-                self.right_frame.pack(fill='both', expand=True)
-                status_msg.set("Successfully analyzed")
+                try:
+                    self.right_frame = Gb.GraphBuilder(self.root).build_graph("incidents")
+                    self.right_frame.pack(fill='both', expand=True)
+                    status_msg.set("Successfully analyzed")
+                except OperationFailure:
+                    status_msg.set("An error occurred\nwhile creating plot")
 
         def map_cmd():
             if type_combo.get() == 'Traffic Volume':
                 if year_combo.get() == '2016':
-                    Mb.MapBuilder('TrafficFlow2016', 'volume').build_map()
-                    status_msg.set('Map file successfully\n written')
+                    try:
+                        Mb.MapBuilder('TrafficFlow2016', 'volume').build_map()
+                        status_msg.set('Map file successfully\n written')
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating map")
                 elif year_combo.get() == '2017':
-                    Mb.MapBuilder('TrafficFlow2017', 'volume').build_map()
-                    status_msg.set('Map file successfully\n written')
+                    try:
+                        Mb.MapBuilder('TrafficFlow2017', 'volume').build_map()
+                        status_msg.set('Map file successfully\n written')
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating map")
                 elif year_combo.get() == '2018':
-                    Mb.MapBuilder('TrafficFlow2018', 'volume').build_map()
-                    status_msg.set('Map file successfully\n written')
+                    try:
+                        Mb.MapBuilder('TrafficFlow2018', 'volume').build_map()
+                        status_msg.set('Map file successfully\n written')
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating map")
 
             elif type_combo.get() == 'Traffic Accidents':
                 if year_combo.get() == '2016':
-                    Mb.MapBuilder('TrafficIncidents', 'incidents', year='2016').build_map()
-                    status_msg.set('Map file successfully\n written')
+                    try:
+                        Mb.MapBuilder('TrafficIncidents', 'incidents', year='2016').build_map()
+                        status_msg.set('Map file successfully\n written')
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating map")
                 elif year_combo.get() == '2017':
-                    Mb.MapBuilder('TrafficIncidents', 'incidents', year='2017').build_map()
-                    status_msg.set('Map file successfully\n written')
+                    try:
+                        Mb.MapBuilder('TrafficIncidents', 'incidents', year='2017').build_map()
+                        status_msg.set('Map file successfully\n written')
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating map")
                 elif year_combo.get() == '2018':
-                    Mb.MapBuilder('TrafficIncidents', 'incidents', year='2018').build_map()
-                    status_msg.set('Map file successfully\n written')
+                    try:
+                        Mb.MapBuilder('TrafficIncidents', 'incidents', year='2018').build_map()
+                        status_msg.set('Map file successfully\n written')
+                    except OperationFailure:
+                        status_msg.set("An error occurred\nwhile creating map")
 
         status_msg = tk.StringVar()
 
@@ -173,6 +236,3 @@ class LeftFrame(tk.Frame):
 
         status_text = tk.Label(self, textvariable=status_msg, width=20, height=4)
         status_text.pack()
-
-
-

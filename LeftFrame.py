@@ -1,11 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
-
-from pymongo.errors import OperationFailure
-
-import RightFrame as Rf
 import GraphBuilder as Gb
 import MapBuilder as Mb
+import TableBuilder as Tb
+from pymongo.errors import OperationFailure
 
 
 class LeftFrame(tk.Frame):
@@ -27,7 +25,7 @@ class LeftFrame(tk.Frame):
                     # Because this button is for read only, all the method calls will have this no filter
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2016')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("volume", 'TrafficFlow2016', '2016')
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
@@ -35,7 +33,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == '2017':
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2017')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("volume", 'TrafficFlow2017', '2017')
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
@@ -43,7 +41,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == '2018':
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2018')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("volume", 'TrafficFlow2018', '2018')
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
@@ -58,7 +56,7 @@ class LeftFrame(tk.Frame):
                     # The added argument filters, from the file, only data that happened in that year
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2016')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("incidents", 'TrafficIncidents', "2016")
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
@@ -66,7 +64,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == '2017':
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2017')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("incidents", 'TrafficIncidents', "2017")
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
@@ -74,7 +72,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == '2018':
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2018')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("incidents", 'TrafficIncidents', "2018")
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
@@ -93,7 +91,7 @@ class LeftFrame(tk.Frame):
                     # the argument sorted will return sorted data
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2016', '2016')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("volume", 'TrafficFlow2016', '2016', sort=True)
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:
@@ -101,7 +99,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == '2017':
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2017', '2017')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("volume", 'TrafficFlow2017', '2017', sort=True)
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:
@@ -109,7 +107,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == '2018':
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2018', '2018')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("volume", 'TrafficFlow2018', '2018', sort=True)
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:
@@ -120,7 +118,7 @@ class LeftFrame(tk.Frame):
                 if year_combo.get() == '2016':
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2016')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("incidents", 'TrafficIncidents', "2016", sort=True)
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:
@@ -128,7 +126,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == '2017':
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2017')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("incidents", 'TrafficIncidents', "2017", sort=True)
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:
@@ -136,7 +134,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == '2018':
                     self.right_frame.destroy()
                     try:
-                        self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2018')
+                        self.right_frame = Tb.TableBuilder(self.root).build_table_flow("incidents", 'TrafficIncidents', "2018", sort=True)
                         self.right_frame.pack(fill='both', expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:

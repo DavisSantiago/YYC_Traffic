@@ -7,10 +7,10 @@ class TableBuilder:
     def __init__(self, master):
         self.master = master
 
-    def build_table_flow(self, data, collection, year=None, sort=None):
+    def build_table_flow(self, data, collection, year=None, sort=False):
         if data == "incidents":
 
-            if sort == 'sorted':
+            if sort:
                 table_incidents = Lb.ListBuilder.build_list(data, collection, year, sort=True)
 
                 tree = ttk.Treeview(master=self.master, column=("Address", "Count"), show='headings')

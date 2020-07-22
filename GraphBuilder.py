@@ -9,17 +9,24 @@ class GraphBuilder:
     def __init__(self, master):
         self.master = master
 
+    @staticmethod
+    def sum_incidents(year_list):
+        incident_count = {}
+        for address in year_list:
+            if address not in incident_count:
+                incident_count[address] = 1
+            else:
+                incident_count[address] += 1
+        return incident_count
+
     def build_graph(self, data):
         if data == "volume":
             years = {'2016': 'TrafficFlow2016', '2017': 'TrafficFlow2017', '2018': 'TrafficFlow2018'}
             year_max = []
             year_list = []
 
-            for year, file in years.items():
-
-                results = Db.Query().query(file)
-
-                volume_list = Lb.ListBuilder.build_list(data, results, year, sort=True)
+            for year, collection in years.items():
+                volume_list = Lb.ListBuilder.build_list(data, collection, year, sort=True)
 
                 year_list.append(year)
                 year_max.append(volume_list[0][4])
@@ -53,29 +60,9 @@ class GraphBuilder:
                 if '2018' in item["start_time"]:
                     incidents_2018.append((item["address"]))
 
-            accident_count_2016 = {}
-            for address in incidents_2016:
-                if address not in accident_count_2016:
-                    accident_count_2016[address] = 1
-                else:
-                    accident_count_2016[address] += 1
-            max_incidents_per_year.append(max(accident_count_2016.values()))
-
-            accident_count_2017 = {}
-            for address in incidents_2017:
-                if address not in accident_count_2017:
-                    accident_count_2017[address] = 1
-                else:
-                    accident_count_2017[address] += 1
-            max_incidents_per_year.append(max(accident_count_2017.values()))
-
-            accident_count_2018 = {}
-            for address in incidents_2018:
-                if address not in accident_count_2018:
-                    accident_count_2018[address] = 1
-                else:
-                    accident_count_2018[address] += 1
-            max_incidents_per_year.append(max(accident_count_2018.values()))
+            max_incidents_per_year.append(max(self.sum_incidents(incidents_2016).values()))
+            max_incidents_per_year.append(max(self.sum_incidents(incidents_2017).values()))
+            max_incidents_per_year.append(max(self.sum_incidents(incidents_2018).values()))
 
             figure = Figure(figsize=(13, 12), dpi=100)
             figure.suptitle("Max accidents per year", fontsize=20)

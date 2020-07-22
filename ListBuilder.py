@@ -3,9 +3,11 @@ import DatabaseQuery as Db
 class ListBuilder:
 
     @staticmethod
-    def build_list(data, results, year=None, sort=False):
+    def build_list(data, collection, year=None, sort=False):
         if data == "volume":
             volume_list = []
+
+            results = Db.Query().query(collection)
             for item in results:
                 volume_list.append(
                     (item["segment"], item["coordinates"], item["year"], item["length"], item["volume"]))
@@ -18,6 +20,8 @@ class ListBuilder:
 
         elif data == "incidents":
             incidents_list = []
+
+            results = Db.Query().query(collection)
 
             if sort:
                 for item in results:

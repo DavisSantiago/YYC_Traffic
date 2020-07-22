@@ -4,22 +4,21 @@ import ListBuilder as Lb
 
 class TableBuilder:
 
-    def __init__(self, master, results):
-        self.results = results
+    def __init__(self, master):
         self.master = master
 
-    def build_table_flow(self, data, year=None, sort=None):
+    def build_table_flow(self, data, collection, year=None, sort=None):
         if data == "incidents":
 
             if sort == 'sorted':
-                table_incidents = Lb.ListBuilder.build_list(data, self.results, year, sort=True)
+                table_incidents = Lb.ListBuilder.build_list(data, collection, year, sort=True)
 
                 tree = ttk.Treeview(master=self.master, column=("Address", "Count"), show='headings')
                 tree.heading("Address", text="Address")
                 tree.heading("Count", text="Count")
 
             else:
-                table_incidents = Lb.ListBuilder.build_list(data, self.results, year)
+                table_incidents = Lb.ListBuilder.build_list(data, collection, year)
 
                 tree = ttk.Treeview(master=self.master, column=("Address", "Description", "Start Time", "Modified Time", "Quadrant",
                                             "Longitude", "Latitude", "Location", "Count", "ID"), show='headings')
@@ -57,9 +56,9 @@ class TableBuilder:
 
         elif data == "volume":
             if sort:
-                table_volume = Lb.ListBuilder.build_list(data, self.results, sort=True)
+                table_volume = Lb.ListBuilder.build_list(data, collection, sort=True)
             else:
-                table_volume = Lb.ListBuilder.build_list(data, self.results)
+                table_volume = Lb.ListBuilder.build_list(data, collection)
 
             tree = ttk.Treeview(master=self.master, column=("Segment", "Coordinates", "Year", "Length", "Volume"), show='headings')
             tree.heading("Segment", text="Segment")

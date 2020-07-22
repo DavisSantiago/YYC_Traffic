@@ -34,44 +34,44 @@ class LeftFrame(tk.Frame):
             if type_combo.get() == 'Traffic Volume':
                 if year_combo.get() == '2016':
                     # Clears the previous message
-                    status_msg.set("Successfully read\nfrom Database")
                     # Builds frame, no filter means the data will be displayed as it is on the file
                     # Because this button is for read only, all the method calls will have this no filter
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2016')
                     self.right_frame.pack(fill='both', expand=True)
-                elif year_combo.get() == '2017':
                     status_msg.set("Successfully read\nfrom Database")
+                elif year_combo.get() == '2017':
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2017')
                     self.right_frame.pack(fill='both', expand=True)
-                elif year_combo.get() == '2018':
                     status_msg.set("Successfully read\nfrom Database")
+                elif year_combo.get() == '2018':
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficFlow2018')
                     self.right_frame.pack(fill='both', expand=True)
+                    status_msg.set("Successfully read\nfrom Database")
                 # If there is no year selected
                 else:
                     status_msg.set("Please select a Year")
 
             elif type_combo.get() == 'Traffic Accidents':
                 if year_combo.get() == '2016':
-                    status_msg.set("Successfully read\nfrom Database")
                     # I pulled all the data from the same file, we can delete the other ones from out database
                     # The added argument filters, from the file, only data that happened in that year
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2016')
                     self.right_frame.pack(fill='both', expand=True)
-                elif year_combo.get() == '2017':
                     status_msg.set("Successfully read\nfrom Database")
+                elif year_combo.get() == '2017':
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2017')
                     self.right_frame.pack(fill='both', expand=True)
-                elif year_combo.get() == '2018':
                     status_msg.set("Successfully read\nfrom Database")
+                elif year_combo.get() == '2018':
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame("no_filter", 'TrafficIncidents', '2018')
                     self.right_frame.pack(fill='both', expand=True)
+                    status_msg.set("Successfully read\nfrom Database")
                 else:
                     status_msg.set("Please select a Year")
             # If year selected but not type
@@ -85,40 +85,40 @@ class LeftFrame(tk.Frame):
         def sort_cmd():
             if type_combo.get() == 'Traffic Volume':
                 if year_combo.get() == '2016':
-                    status_msg.set("Successfully sorted")
                     # For all the method calls to build frame in sort button
                     # the argument sorted will return sorted data
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2016', '2016')
                     self.right_frame.pack(fill='both', expand=True)
-                elif year_combo.get() == '2017':
                     status_msg.set("Successfully sorted")
+                elif year_combo.get() == '2017':
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2017', '2017')
                     self.right_frame.pack(fill='both', expand=True)
-                elif year_combo.get() == '2018':
                     status_msg.set("Successfully sorted")
+                elif year_combo.get() == '2018':
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficFlow2018', '2018')
                     self.right_frame.pack(fill='both', expand=True)
+                    status_msg.set("Successfully sorted")
                 else:
                     status_msg.set("Please select a Year")
             elif type_combo.get() == 'Traffic Accidents':
                 if year_combo.get() == '2016':
-                    status_msg.set("Successfully sorted")
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2016')
                     self.right_frame.pack(fill='both', expand=True)
-                elif year_combo.get() == '2017':
                     status_msg.set("Successfully sorted")
+                elif year_combo.get() == '2017':
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2017')
                     self.right_frame.pack(fill='both', expand=True)
-                elif year_combo.get() == '2018':
                     status_msg.set("Successfully sorted")
+                elif year_combo.get() == '2018':
                     self.right_frame.destroy()
                     self.right_frame = Rf.RightFrame(self.root).build_frame('sorted', 'TrafficIncidents', '2018')
                     self.right_frame.pack(fill='both', expand=True)
+                    status_msg.set("Successfully sorted")
                 else:
                     status_msg.set("Please select a Year")
             else:
@@ -129,24 +129,10 @@ class LeftFrame(tk.Frame):
 
         def analysis_cmd():
             if type_combo.get() == 'Traffic Volume':
-                status_text.delete('1.0', tk.END)
-                status_text.insert(tk.END, "Volume graph")
-                if isinstance(self.right_frame, Gb.GraphBuilder):
-                    print("Graph")
-                    Gb.GraphBuilder.delete(self.right_frame)
-                else:
-                    print("Not graph")
                 self.right_frame.destroy()
                 self.right_frame = Gb.GraphBuilder(self.root).build_graph('traffic')
                 self.right_frame.pack(fill='both', expand=True)
             elif type_combo.get() == 'Traffic Accidents':
-                status_text.delete('1.0', tk.END)
-                status_text.insert(tk.END, "Incidents graph")
-                if isinstance(self.right_frame, Gb.GraphBuilder):
-                    print("Graph")
-                    Gb.GraphBuilder.delete(self.right_frame)
-                else:
-                    print("Not graph")
                 self.right_frame.destroy()
                 self.right_frame = Gb.GraphBuilder(self.root).build_graph('accidents')
                 self.right_frame.pack(fill='both', expand=True)

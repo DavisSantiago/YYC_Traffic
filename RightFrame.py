@@ -51,6 +51,6 @@ class RightFrame(tk.Frame):
                 else:
                     tree = Tb.TableBuilder(self, results).build_table_flow("incidents", '2018')
                     tree.pack(fill='both', expand=True)
-        print('right frame children', self.winfo_children())
+
         return self
 

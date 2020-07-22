@@ -103,4 +103,4 @@ class GraphBuilder(tk.Frame):
             self.plot_test = self.canvas.get_tk_widget()
             self.plot_test.pack()
 
-            return self
+            return self.plot_test

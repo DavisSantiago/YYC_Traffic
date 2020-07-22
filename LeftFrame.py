@@ -110,12 +110,12 @@ class LeftFrame(tk.Frame):
         def analysis_cmd():
             if type_combo.get() == 'Traffic Volume':
                 self.right_frame.destroy()
-                self.right_frame = Gb.GraphBuilder(self.root).build_graph('traffic')
+                self.right_frame = Gb.GraphBuilder(self.root).build_graph("volume")
                 self.right_frame.pack(fill='both', expand=True)
                 status_msg.set("Successfully analyzed")
             elif type_combo.get() == 'Traffic Accidents':
                 self.right_frame.destroy()
-                self.right_frame = Gb.GraphBuilder(self.root).build_graph('accidents')
+                self.right_frame = Gb.GraphBuilder(self.root).build_graph("incidents")
                 self.right_frame.pack(fill='both', expand=True)
                 status_msg.set("Successfully analyzed")
 

@@ -1,4 +1,5 @@
 import DatabaseQuery as Db
+import ListBuilder as Lb
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
@@ -9,22 +10,16 @@ class GraphBuilder:
         self.master = master
 
     def build_graph(self, data):
-        if data == 'traffic':
+        if data == "volume":
             years = {'2016': 'TrafficFlow2016', '2017': 'TrafficFlow2017', '2018': 'TrafficFlow2018'}
             year_max = []
             year_list = []
 
             for year, file in years.items():
-                volume_list = []
 
                 results = Db.Query().query(file)
 
-                for item in results:
-                    volume_list.append(
-                        (item["segment"], item["coordinates"], item["year"], item["length"], item["volume"]))
-
-                temp = volume_list.copy()
-                volume_list = sorted(temp, key=lambda x: x[4], reverse=True)
+                volume_list = Lb.ListBuilder.build_list(data, results, year, sort=True)
 
                 year_list.append(year)
                 year_max.append(volume_list[0][4])
@@ -41,7 +36,7 @@ class GraphBuilder:
 
             return plot_test
 
-        elif data == 'accidents':
+        elif data == "incidents":
             incidents_2016 = []
             incidents_2017 = []
             incidents_2018 = []

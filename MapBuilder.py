@@ -6,7 +6,7 @@ import ListBuilder as Lb
 
 class MapBuilder:
 
-    def __init__(self, collection, data, year=None):
+    def __init__(self, collection, data, year):
         self.collection = collection
         self.data = data
         self.year = year

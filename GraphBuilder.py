@@ -1,20 +1,12 @@
 import DatabaseQuery as Db
-import tkinter as tk
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
-class GraphBuilder(tk.Frame):
+class GraphBuilder:
 
-    def __init__(self, master, **kw):
-        super().__init__(master, **kw)
+    def __init__(self, master):
         self.master = master
-        self.plot_test = tk.Frame
-        self.canvas = None
-
-    def delete(self):
-        self.canvas.get_tk_widget.pack_forget()
-        self.destroy()
 
     def build_graph(self, data):
         if data == 'traffic':
@@ -46,10 +38,8 @@ class GraphBuilder(tk.Frame):
 
             canvas = FigureCanvasTkAgg(figure, self.master)
             plot_test = canvas.get_tk_widget()
-            canvas.get_tk_widget().delete("all")
-            plot_test.pack()
 
-            return self
+            return plot_test
 
         elif data == 'accidents':
             incidents_2016 = []
@@ -99,8 +89,7 @@ class GraphBuilder(tk.Frame):
             plot.set_xlabel("Year", fontsize=15)
             plot.set_ylabel("Incidents", fontsize=15)
 
-            self.canvas = FigureCanvasTkAgg(figure, self.master)
-            self.plot_test = self.canvas.get_tk_widget()
-            self.plot_test.pack()
+            canvas = FigureCanvasTkAgg(figure, self.master)
+            plot_test = canvas.get_tk_widget()
 
-            return self.plot_test
+            return plot_test

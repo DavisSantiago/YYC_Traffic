@@ -132,10 +132,12 @@ class LeftFrame(tk.Frame):
                 self.right_frame.destroy()
                 self.right_frame = Gb.GraphBuilder(self.root).build_graph('traffic')
                 self.right_frame.pack(fill='both', expand=True)
+                print(type(self.right_frame))
             elif type_combo.get() == 'Traffic Accidents':
                 self.right_frame.destroy()
                 self.right_frame = Gb.GraphBuilder(self.root).build_graph('accidents')
                 self.right_frame.pack(fill='both', expand=True)
+                print(type(self.right_frame))
 
         def map_cmd():
             if type_combo.get() == 'Traffic Volume':

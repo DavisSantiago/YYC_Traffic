@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 import RightFrame as Rf
 import GraphBuilder as Gb
+import MapBuilder as Mb
 
 
 class LeftFrame(tk.Frame):
@@ -134,10 +135,33 @@ class LeftFrame(tk.Frame):
                 self.right_frame = Gb.GraphBuilder(self.root).build_graph('traffic')
                 self.right_frame.pack(fill='both', expand=True)
 
+        def map_cmd():
+            if type_combo.get() == 'Traffic Volume':
+                if year_combo.get() == '2016':
+                    Mb.MapBuilder('TrafficFlow2016', 'volume').build_map()
+                    status_msg.set('Map file successfully\n written')
+                elif year_combo.get() == '2017':
+                    Mb.MapBuilder('TrafficFlow2017', 'volume').build_map()
+                    status_msg.set('Map file successfully\n written')
+                elif year_combo.get() == '2018':
+                    Mb.MapBuilder('TrafficFlow2018', 'volume').build_map()
+                    status_msg.set('Map file successfully\n written')
+
+            elif type_combo.get() == 'Traffic Accidents':
+                if year_combo.get() == '2016':
+                    Mb.MapBuilder('TrafficIncidents', 'incidents', year='2016').build_map()
+                    status_msg.set('Map file successfully\n written')
+                elif year_combo.get() == '2017':
+                    Mb.MapBuilder('TrafficIncidents', 'incidents', year='2017').build_map()
+                    status_msg.set('Map file successfully\n written')
+                elif year_combo.get() == '2018':
+                    Mb.MapBuilder('TrafficIncidents', 'incidents', year='2018').build_map()
+                    status_msg.set('Map file successfully\n written')
+
         analysis_btn = tk.Button(self, text="Analysis", width=19, command=analysis_cmd)
         analysis_btn.pack()
 
-        map_btn = tk.Button(self, text="Map", width=19)
+        map_btn = tk.Button(self, text="Map", width=19, command=map_cmd)
         map_btn.pack()
 
         status_label = tk.Label(self, font=("Calibri", 12, 'bold'), text="Status:")

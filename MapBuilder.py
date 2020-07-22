@@ -95,6 +95,6 @@ class MapBuilder:
 
 
 if __name__ == '__main__':
-    MapBuilder("TrafficFlow2018", data="volume", year="2016").build_map()
+    MapBuilder("TrafficIncidents", data="incidents", year="2016").build_map()
 
 

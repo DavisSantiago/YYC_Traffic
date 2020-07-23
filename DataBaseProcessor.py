@@ -3,6 +3,7 @@ import pandas as pd
 
 """
 This script was used to read and write the data from the provided CSV files to the MongoDB database. 
+***DO NOT RUN THIS SCRIPT OTHERWISE IT WILL DUPLICATE THE DATABASE. WAS ONLY USED TO INITIALIZE MONGODB***
 """
 
 # Connecting to MongoDB

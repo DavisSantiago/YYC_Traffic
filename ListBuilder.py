@@ -14,7 +14,7 @@ class ListBuilder:
         :param collection: (str) the collection name in MongoDB
         :param year: (str) the year of the data
         :param sort: (bool) True if the data should be sorted, False otherwise
-        :return:
+        :return: (list) list of the user specified data
         """
 
         if data == "volume":

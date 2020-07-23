@@ -58,11 +58,10 @@ class ListBuilder:
                         incident_count[address] += 1
 
                 # convert the dictionary to a list
-                temp = incident_count.items()
-                table = list(temp)
+                temp = list(incident_count.items())
 
                 # sort the list based on the number of accidents in ascending order
-                incidents_list = sorted(table, key=lambda x: x[1], reverse=True)
+                incidents_list = sorted(temp, key=lambda x: x[1], reverse=True)
 
                 return incidents_list
 

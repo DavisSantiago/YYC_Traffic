@@ -9,10 +9,8 @@ class Query:
     def query(collections):
         """
         Finds the specified collection within the database and returns a pointer to its information
-        :param collections: the name of the collection we are going to query
-        :type collections: str
-        :return: pointer to the information of the specified collection
-        :rtype: pointer
+        :param collections: (str) the name of the collection we are going to query
+        :return: (pointer) pointer to the information of the specified collection
         """
         # The mongodb server URL
         client = MongoClient(

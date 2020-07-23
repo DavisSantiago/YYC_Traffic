@@ -16,10 +16,8 @@ class GraphBuilder:
     def sum_incidents(year_list):
         """
         Adds the number of incidents in the list and returns a dictionary with the values
-        :param year_list: incident list
-        :type year_list: list
-        :return: the count of incidents in every address from the file
-        :rtype: dict
+        :param year_list: (list) incident list
+        :return: (dict) the count of incidents in every address from the file
         """
         incident_count = {}
         # For each address in the list, add to dict if it's not there yet or increase it's counter by 1 if it's there
@@ -33,10 +31,8 @@ class GraphBuilder:
     def build_graph(self, data):
         """
         Creates a graph in a canvas, it can be of volume or incidents and will compare the data for 2016, 2017 and 2018
-        :param data: the type of information we want to display, volume or incidents
-        :type data: str
-        :return: The graph of the selected type in a canvas
-        :rtype: canvas
+        :param data: (str) the type of information we want to display, volume or incidents
+        :return: (canvas) The graph of the selected type in a canvas
         """
         if data == "volume":
             years = {"2016": "TrafficFlow2016", "2017": "TrafficFlow2017", "2018": "TrafficFlow2018"}

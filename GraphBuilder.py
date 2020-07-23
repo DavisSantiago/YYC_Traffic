@@ -17,7 +17,7 @@ class GraphBuilder:
         """
         Adds the number of incidents in the list and returns a dictionary with the values
         :param year_list: (list) incident list
-        :return: (dict) the count of incidents in every address from the file
+        :return: (dict) the count of incidents for every address
         """
         incident_count = {}
         # For each address in the list, add to dict if it's not there yet or increase it's counter by 1 if it's there
@@ -31,8 +31,8 @@ class GraphBuilder:
     def build_graph(self, data):
         """
         Creates a graph in a canvas, it can be of volume or incidents and will compare the data for 2016, 2017 and 2018
-        :param data: (str) the type of information we want to display, volume or incidents
-        :return: (canvas) The graph of the selected type in a canvas
+        :param data: (str) the type of information to be displayed, volume or incidents
+        :return: (canvas) Canvas widget displaying the results in a graph
         """
         if data == "volume":
             years = {"2016": "TrafficFlow2016", "2017": "TrafficFlow2017", "2018": "TrafficFlow2018"}
@@ -47,6 +47,7 @@ class GraphBuilder:
                 year_list.append(year)
                 year_max.append(volume_list[0][4])
 
+            # creating the graph
             figure = Figure(figsize=(13, 12), dpi=100)
             figure.suptitle("Max Traffic Volume Per Year", fontsize=20)
             plot = figure.add_subplot(111)
@@ -82,6 +83,7 @@ class GraphBuilder:
             max_incidents_per_year.append(max(self.sum_incidents(incidents_2017).values()))
             max_incidents_per_year.append(max(self.sum_incidents(incidents_2018).values()))
 
+            # creating the graph
             figure = Figure(figsize=(13, 12), dpi=100)
             figure.suptitle("Max Incidents Per Year", fontsize=20)
             plot = figure.add_subplot(111)

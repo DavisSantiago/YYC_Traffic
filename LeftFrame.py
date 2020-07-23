@@ -8,7 +8,7 @@ from pymongo.errors import OperationFailure
 
 class LeftFrame(tk.Frame):
     """
-    Contains the comboboxes and buttons and controls the display in the GUI
+    Creates and displays the left frame with all widgets and controls the rest of the GUI
     """
 
     def __init__(self, master, root):
@@ -19,10 +19,13 @@ class LeftFrame(tk.Frame):
 
     def build_frame(self):
         """
-        Builds the frame that contains all the elements of the GUI
+        Builds the frame that contains all the elements of the GUI and handles all events
         """
-        # Event listener for read button
+
         def read_cmd():
+            """
+            Event listener for the Read button, updates the display with the un-sorted table upon being activated
+            """
             if type_combo.get() == "Traffic Volume":
                 if year_combo.get() == "2016":
                     self.display.destroy()
@@ -87,8 +90,11 @@ class LeftFrame(tk.Frame):
             else:
                 status_msg.set("Please select Volume\nor Incidents")
 
-        # Event listener for sort button
+        #
         def sort_cmd():
+            """
+            Event listener for the Sort button, updates the display with the sorted data table upon being activated
+            """
             if type_combo.get() == "Traffic Volume":
                 if year_combo.get() == "2016":
                     self.display.destroy()
@@ -152,6 +158,9 @@ class LeftFrame(tk.Frame):
 
         # Event listener for analysis button
         def analysis_cmd():
+            """
+            Event listener for the Analysis button, updates the display with the graph upon being activated
+            """
             if type_combo.get() == "Traffic Volume":
                 self.display.destroy()
                 try:
@@ -176,6 +185,9 @@ class LeftFrame(tk.Frame):
 
         # Event listener for map button
         def map_cmd():
+            """
+            Event listener for the Map button, creates and writes the map file upon being activated
+            """
             if type_combo.get() == "Traffic Volume":
                 if year_combo.get() == "2016":
                     try:

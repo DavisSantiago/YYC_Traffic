@@ -8,7 +8,7 @@ class TableBuilder:
     """
 
     def __init__(self, master):
-        self.master = master  # reference to the master of the widget
+        self.master = master
 
     def build_table(self, data, collection, year=None, sort=False):
         """
@@ -26,6 +26,7 @@ class TableBuilder:
             if sort:
                 table_incidents = Lb.ListBuilder.build_list(data, collection, year, sort=True)
 
+                # creating Treeview headings and widget
                 tree = ttk.Treeview(master=self.master, column=("Address", "Count"), show="headings")
                 tree.heading("Address", text="Address")
                 tree.heading("Count", text="Count")
@@ -38,7 +39,7 @@ class TableBuilder:
                                                                 "Quadrant", "Longitude", "Latitude", "Location", "Count",
                                                                 "ID"), show="headings")
                 tree.heading("Address", text="Address")
-                tree.column("Address", width=150)
+                tree.column("Address", width=200)
                 tree.heading("Description", text="Description")
                 tree.column("Description", width=100)
                 tree.heading("Start Time", text="Start Time")

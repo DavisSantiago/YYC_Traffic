@@ -3,13 +3,13 @@ import DatabaseQuery as Db
 
 class ListBuilder:
     """
-    Queries the database and generates a 2 dimensional list containing the user specified data
+    Queries the database and generates a list containing the user specified data
     """
 
     @staticmethod
     def build_list(data, collection, year=None, sort=False):
         """
-        Queries the database and generates a 2 dimensional list containing the user specified data
+        Queries the database and generates a list containing the user specified data
         :param data: (str) name of the data to be appended (traffic incidents or traffic volume)
         :param collection: (str) the collection name in MongoDB
         :param year: (str) the year of the data

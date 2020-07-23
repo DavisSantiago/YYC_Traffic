@@ -23,6 +23,7 @@ class MapBuilder:
         if self.data == "incidents":
             table_incidents = Lb.ListBuilder.build_list(self.data, self.collection, self.year, sort=True)
 
+            # extracting the maximum number of incidents and its address
             max_section = table_incidents[0][0]
             num_accidents = table_incidents[0][1]
 
@@ -41,7 +42,7 @@ class MapBuilder:
             lat, long = location.split(",")
             lat, long = float(lat), float(long)
 
-            # create the map
+            # create and save the map
             m = folium.Map(location=[lat, long], zoom_start=15)
             folium.Marker(
                 location=[lat, long],
@@ -53,7 +54,7 @@ class MapBuilder:
         elif self.data == "volume":
             table_volume = Lb.ListBuilder.build_list(self.data, self.collection, self.year, sort=True)
 
-            # getting the string of coordinates
+            # getting the string of coordinates of the maximum traffic flow segment
             raw_string = table_volume[0][1]
 
             # formatting the string to extract unnecessary characters
@@ -68,7 +69,7 @@ class MapBuilder:
                 long, lat = coordinate.split()
                 lat_long_list.append((float(lat), float(long)))
 
-            # create the map
+            # create and save the map
             m = folium.Map(location=[lat_long_list[0][0], lat_long_list[0][1]], zoom_start=14)
             folium.PolyLine(lat_long_list, weight=8).add_to(m)
             folium.Marker(lat_long_list[0], popup=table_volume[0][0] + " Volume = " + str(table_volume[0][4])).add_to(m)

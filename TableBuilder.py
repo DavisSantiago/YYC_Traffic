@@ -29,7 +29,7 @@ class TableBuilder:
                 # creating Treeview headings and widget
                 tree = ttk.Treeview(master=self.master, column=("Address", "Count"), show="headings")
                 tree.heading("Address", text="Address")
-                tree.heading("Count", text="Count")
+                tree.heading("Count", text="Number of Incidents")
 
             else:
                 table_incidents = Lb.ListBuilder.build_list(data, collection, year)

@@ -32,7 +32,7 @@ data = pd.read_csv("2017_Traffic_Volume_Flow.csv")
 headers = {"segment_name": "segment", "the_geom": "coordinates", "length_m": "length"}
 data.rename(columns=headers, inplace=True)
 
-data_dict = data.to_dict("records")
+data_dict = data.to_dict("records")  # converting the DataFrame to a dictionary
 
 collection.insert_many(data_dict)
 

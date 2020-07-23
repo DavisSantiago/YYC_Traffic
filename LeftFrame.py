@@ -191,19 +191,19 @@ class LeftFrame(tk.Frame):
             if type_combo.get() == "Traffic Volume":
                 if year_combo.get() == "2016":
                     try:
-                        Mb.MapBuilder("TrafficFlow2016", "volume").build_map()
+                        Mb.MapBuilder("TrafficFlow2016", "volume", "2016").build_map()
                         status_msg.set("Map file successfully\n written")
                     except OperationFailure:
                         status_msg.set("An error occurred\nwhile creating map")
                 elif year_combo.get() == "2017":
                     try:
-                        Mb.MapBuilder("TrafficFlow2017", "volume").build_map()
+                        Mb.MapBuilder("TrafficFlow2017", "volume", "2017").build_map()
                         status_msg.set("Map file successfully\n written")
                     except OperationFailure:
                         status_msg.set("An error occurred\nwhile creating map")
                 elif year_combo.get() == "2018":
                     try:
-                        Mb.MapBuilder("TrafficFlow2018", "volume").build_map()
+                        Mb.MapBuilder("TrafficFlow2018", "volume", "2018").build_map()
                         status_msg.set("Map file successfully\n written")
                     except OperationFailure:
                         status_msg.set("An error occurred\nwhile creating map")

@@ -1,6 +1,10 @@
 import tkinter as tk
 import LeftFrame as Lf
 
+"""
+Authors: Davis Allan and Santiago Flores
+ID's: 10016543, 30119885
+"""
 
 class MainApplication(tk.Frame):
     """
@@ -18,4 +22,5 @@ if __name__ == "__main__":
     # setting the root window to be full screen when the application launches
     w, h = root.winfo_screenwidth(), root.winfo_screenheight()
     root.geometry(("%dx%d" % (w, h)))
+    root.title("YYC Traffic Analyzer")
     root.mainloop()

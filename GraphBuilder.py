@@ -73,9 +73,9 @@ class GraphBuilder:
             for item in results:
                 if "2016" in item["start_time"]:
                     incidents_2016.append((item["address"]))
-                if "2017" in item["start_time"]:
+                elif "2017" in item["start_time"]:
                     incidents_2017.append((item["address"]))
-                if "2018" in item["start_time"]:
+                elif "2018" in item["start_time"]:
                     incidents_2018.append((item["address"]))
 
             # Adding the maximum value for each year to max incidents per year list

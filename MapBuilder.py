@@ -27,7 +27,7 @@ class MapBuilder:
                 if max_section in item["address"]:
                     location = item["location"]
                     break
-
+            # processing the string to get the coordinates
             location = location.strip("()")
             lat, long = location.split(",")
             lat, long = float(lat), float(long)

@@ -28,7 +28,7 @@ class LeftFrame(tk.Frame):
                     self.display.destroy()
                     # Attempts to get the information from the database
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("volume", "TrafficFlow2016", "2016")
+                        self.display = Tb.TableBuilder(self.root).build_table("volume", "TrafficFlow2016", "2016")
                         self.display.pack(fill="both", side="right", expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     # Error message if it can't connect to the database
@@ -37,7 +37,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == "2017":
                     self.display.destroy()
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("volume", "TrafficFlow2017", "2017")
+                        self.display = Tb.TableBuilder(self.root).build_table("volume", "TrafficFlow2017", "2017")
                         self.display.pack(fill="both", expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
@@ -45,7 +45,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == "2018":
                     self.display.destroy()
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("volume", "TrafficFlow2018", "2018")
+                        self.display = Tb.TableBuilder(self.root).build_table("volume", "TrafficFlow2018", "2018")
                         self.display.pack(fill="both", expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
@@ -58,7 +58,7 @@ class LeftFrame(tk.Frame):
                 if year_combo.get() == "2016":
                     self.display.destroy()
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("incidents", "TrafficIncidents", "2016")
+                        self.display = Tb.TableBuilder(self.root).build_table("incidents", "TrafficIncidents", "2016")
                         self.display.pack(fill="both", expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
@@ -66,7 +66,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == "2017":
                     self.display.destroy()
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("incidents", "TrafficIncidents", "2017")
+                        self.display = Tb.TableBuilder(self.root).build_table("incidents", "TrafficIncidents", "2017")
                         self.display.pack(fill="both", expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
@@ -74,7 +74,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == "2018":
                     self.display.destroy()
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("incidents", "TrafficIncidents", "2018")
+                        self.display = Tb.TableBuilder(self.root).build_table("incidents", "TrafficIncidents", "2018")
                         self.display.pack(fill="both", expand=True)
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
@@ -93,7 +93,7 @@ class LeftFrame(tk.Frame):
                 if year_combo.get() == "2016":
                     self.display.destroy()
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("volume", "TrafficFlow2016", "2016", sort=True)
+                        self.display = Tb.TableBuilder(self.root).build_table("volume", "TrafficFlow2016", "2016", sort=True)
                         self.display.pack(fill="both", expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:
@@ -101,7 +101,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == "2017":
                     self.display.destroy()
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("volume", "TrafficFlow2017", "2017", sort=True)
+                        self.display = Tb.TableBuilder(self.root).build_table("volume", "TrafficFlow2017", "2017", sort=True)
                         self.display.pack(fill="both", expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:
@@ -109,7 +109,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == "2018":
                     self.display.destroy()
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("volume", "TrafficFlow2018", "2018", sort=True)
+                        self.display = Tb.TableBuilder(self.root).build_table("volume", "TrafficFlow2018", "2018", sort=True)
                         self.display.pack(fill="both", expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:
@@ -121,7 +121,7 @@ class LeftFrame(tk.Frame):
                 if year_combo.get() == "2016":
                     self.display.destroy()
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("incidents", "TrafficIncidents", "2016", sort=True)
+                        self.display = Tb.TableBuilder(self.root).build_table("incidents", "TrafficIncidents", "2016", sort=True)
                         self.display.pack(fill="both", expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:
@@ -129,7 +129,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == "2017":
                     self.display.destroy()
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("incidents", "TrafficIncidents", "2017", sort=True)
+                        self.display = Tb.TableBuilder(self.root).build_table("incidents", "TrafficIncidents", "2017", sort=True)
                         self.display.pack(fill="both", expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:
@@ -137,7 +137,7 @@ class LeftFrame(tk.Frame):
                 elif year_combo.get() == "2018":
                     self.display.destroy()
                     try:
-                        self.display = Tb.TableBuilder(self.root).build_table_flow("incidents", "TrafficIncidents", "2018", sort=True)
+                        self.display = Tb.TableBuilder(self.root).build_table("incidents", "TrafficIncidents", "2018", sort=True)
                         self.display.pack(fill="both", expand=True)
                         status_msg.set("Successfully sorted")
                     except OperationFailure:

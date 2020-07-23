@@ -7,26 +7,31 @@ from pymongo.errors import OperationFailure
 
 
 class LeftFrame(tk.Frame):
+    """
+    Contains the comboboxes and buttons and controls the display in the GUI
+    """
 
     def __init__(self, master, root):
         tk.Frame.__init__(self, master)
         self.root = root
-        self.display = tk.Frame()  # temp frame so that we can use .destroy right before calling the new updated frame
+        self.display = tk.Frame()
         self.build_frame()
 
     def build_frame(self):
+        """
+        Builds the frame that contains all the elements of the GUI
+        """
         # Event listener for read button
         def read_cmd():
             if type_combo.get() == "Traffic Volume":
                 if year_combo.get() == "2016":
-                    # Clears the previous message
-                    # Builds frame, no filter means the data will be displayed as it is on the file
-                    # Because this button is for read only, all the method calls will have this no filter
                     self.display.destroy()
+                    # Attempts to get the information from the database
                     try:
                         self.display = Tb.TableBuilder(self.root).build_table_flow("volume", "TrafficFlow2016", "2016")
                         self.display.pack(fill="both", side="right", expand=True)
                         status_msg.set("Successfully read\nfrom Database")
+                    # Error message if it can't connect to the database
                     except OperationFailure:
                         status_msg.set("An error occurred\nwhile creating table")
                 elif year_combo.get() == "2017":
@@ -45,14 +50,12 @@ class LeftFrame(tk.Frame):
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
                         status_msg.set("An error occurred\nwhile creating table")
-                # If there is no year selected
+                # If no year is selected
                 else:
                     status_msg.set("Please select a Year")
 
-            elif type_combo.get() == "Traffic Accidents":
+            elif type_combo.get() == "Traffic Incidents":
                 if year_combo.get() == "2016":
-                    # I pulled all the data from the same file, we can delete the other ones from out database
-                    # The added argument filters, from the file, only data that happened in that year
                     self.display.destroy()
                     try:
                         self.display = Tb.TableBuilder(self.root).build_table_flow("incidents", "TrafficIncidents", "2016")
@@ -76,18 +79,18 @@ class LeftFrame(tk.Frame):
                         status_msg.set("Successfully read\nfrom Database")
                     except OperationFailure:
                         status_msg.set("An error occurred\nwhile creating table")
+                # If no year is selected
                 else:
                     status_msg.set("Please select a Year")
-            # If year selected but not type
+
+            # If no type is selected
             else:
-                status_msg.set("Please select Volume\nor Accidents")
+                status_msg.set("Please select Volume\nor Incidents")
 
         # Event listener for sort button
         def sort_cmd():
             if type_combo.get() == "Traffic Volume":
                 if year_combo.get() == "2016":
-                    # For all the method calls to build frame in sort button
-                    # the argument sorted will return sorted data
                     self.display.destroy()
                     try:
                         self.display = Tb.TableBuilder(self.root).build_table_flow("volume", "TrafficFlow2016", "2016", sort=True)
@@ -113,7 +116,8 @@ class LeftFrame(tk.Frame):
                         status_msg.set("An error occurred\nwhile creating table")
                 else:
                     status_msg.set("Please select a Year")
-            elif type_combo.get() == "Traffic Accidents":
+
+            elif type_combo.get() == "Traffic Incidents":
                 if year_combo.get() == "2016":
                     self.display.destroy()
                     try:
@@ -138,11 +142,15 @@ class LeftFrame(tk.Frame):
                         status_msg.set("Successfully sorted")
                     except OperationFailure:
                         status_msg.set("An error occurred\nwhile creating table")
+                # If no year is selected
                 else:
                     status_msg.set("Please select a Year")
-            else:
-                status_msg.set("Please select Volume\nor Accidents")
 
+            # If no type is selected
+            else:
+                status_msg.set("Please select Volume\nor Incidents")
+
+        # Event listener for analysis button
         def analysis_cmd():
             if type_combo.get() == "Traffic Volume":
                 self.display.destroy()
@@ -152,7 +160,8 @@ class LeftFrame(tk.Frame):
                     status_msg.set("Successfully analyzed")
                 except OperationFailure:
                     status_msg.set("An error occurred\nwhile creating plot")
-            elif type_combo.get() == "Traffic Accidents":
+
+            elif type_combo.get() == "Traffic Incidents":
                 self.display.destroy()
                 try:
                     self.display = Gb.GraphBuilder(self.root).build_graph("incidents")
@@ -161,6 +170,11 @@ class LeftFrame(tk.Frame):
                 except OperationFailure:
                     status_msg.set("An error occurred\nwhile creating plot")
 
+            # If no type is selected
+            else:
+                status_msg.set("Please select Volume\nor Incidents")
+
+        # Event listener for map button
         def map_cmd():
             if type_combo.get() == "Traffic Volume":
                 if year_combo.get() == "2016":
@@ -182,7 +196,7 @@ class LeftFrame(tk.Frame):
                     except OperationFailure:
                         status_msg.set("An error occurred\nwhile creating map")
 
-            elif type_combo.get() == "Traffic Accidents":
+            elif type_combo.get() == "Traffic Incidents":
                 if year_combo.get() == "2016":
                     try:
                         Mb.MapBuilder("TrafficIncidents", "incidents", year="2016").build_map()
@@ -202,12 +216,16 @@ class LeftFrame(tk.Frame):
                     except OperationFailure:
                         status_msg.set("An error occurred\nwhile creating map")
 
+            # If no type is selected
+            else:
+                status_msg.set("Please select Volume\nor Incidents")
+
         status_msg = tk.StringVar()
 
         type_label = tk.Label(self, text="Choose type of data to visualize:")
         type_label.pack()
 
-        type_combo = ttk.Combobox(self, values=("Traffic Accidents", "Traffic Volume"))
+        type_combo = ttk.Combobox(self, values=("Traffic Incidents", "Traffic Volume"))
         type_combo.pack()
 
         year_label = tk.Label(self, text="Choose a year:")
